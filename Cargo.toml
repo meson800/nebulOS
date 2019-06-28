@@ -1,0 +1,7 @@
+[package]
+name = "nebulos"
+version = "0.1.0"
+authors = ["Christopher Johnstone <meson800@gmail.com>"]
+edition = "2018"
+
+[dependencies]
