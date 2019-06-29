@@ -1,0 +1,14 @@
+[package]
+name = "nebulos-hydrogen"
+version = "0.1.0"
+authors = ["Christopher Johnstone <meson800@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+r-efi = "2.1.0"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
