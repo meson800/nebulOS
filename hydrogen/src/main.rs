@@ -4,6 +4,8 @@
 use core::panic::PanicInfo;
 use r_efi::efi;
 
+mod efi_wrapper;
+
 // Infinite loop on panic
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
@@ -20,6 +22,19 @@ pub extern fn efi_main(handle: efi::Handle, st: *mut efi::SystemTable) -> efi::S
         0x000au16,                                                          // "\n"
         0x0000u16,                                                          // NUL
     ];
+
+
+    let mut efi_state = efi_wrapper::BootState::from(&handle, st);
+
+    let r = efi_state.clear_screen();
+    if r.is_error() {
+        return r;
+    }
+    
+    let r = efi_state.write_string("Testing to UCS2");
+    if r.is_error() {
+        return r;
+    }
 
     // Print "Hello World!".
     let r = unsafe {
